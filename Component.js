@@ -1,27 +1,17 @@
 sap.ui.define([
-               "sap/ui/core/UIComponent",
+               "sap/ui/core/UIComponent",    //using define instead of jQuery.sap.require and adding controls here
                "sap/ui/model/json/JSONModel",
                "sap/ui/model/resource/ResourceModel",
-               "BasicFiori-Routing/controller/HelloDialog"
-               ], function (UIComponent, JSONModel, ResourceModel, HelloDialog) {
+               ], function (UIComponent, JSONModel, ResourceModel) {
 	"use strict";
-	return UIComponent.extend("BasicFiori-Routing.Component", {
+	return UIComponent.extend("com.kloudData.Component", {
 		metadata : {
-//			rootView: "BasicFiori-Routing.view.App",
-			manifest: "json"
+                 manifest: "json"  // manifest.json to implement the routing and service
 		},
 		init : function () {
 			// call the init function of the parent
 			UIComponent.prototype.init.apply(this, arguments);
-			
-			// set data model on view
-			   var oData = {
-					   recipient : {
-						   name : "Worldly ppl"
-					   }
-			   };
-			   var oModel = new JSONModel(oData);
-			   this.setModel(oModel);
+		
 			   
 			   // set invoice model - local
 			   var oConfig = this.getMetadata().getConfig();
@@ -31,23 +21,12 @@ sap.ui.define([
 			   
 			   // set i18n model on view
 			   var i18nModel = new ResourceModel({
-				   bundleName: "BasicFiori-Routing.i18n.messageBundle"
+				   bundleName: "com.kloudData.i18n.messageBundle"
 			   });
-			   this.setModel(i18nModel, "i18n");
-			// set dialog	
-			   this.helloDialog = new HelloDialog();
-			   
+			   this.setModel(i18nModel, "i18n"); 
 			   //Router
 			// create the views based on the url/hash
-				this.getRouter().initialize();
-				
-				//First time when no category is selected, default welcome page should be displayed
-				//navigate to initial page for !phone
-				if (!sap.ui.Device.system.phone) {
-					this.getRouter().getTargets().display("welcome");
-				}
-			   
-			
+				this.getRouter().initialize();	
 		}
 	});
 });

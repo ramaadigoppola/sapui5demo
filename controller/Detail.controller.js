@@ -3,7 +3,7 @@ sap.ui.define([
 	"sap/ui/core/routing/History"
 ], function (Controller, History) {
 	"use strict";
-	return Controller.extend("BasicFiori-Routing.controller.Detail", {
+	return Controller.extend("com.kloudData.controller.Detail", {
 		onInit: function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.getRoute("detail").attachPatternMatched(this._onObjectMatched, this);
